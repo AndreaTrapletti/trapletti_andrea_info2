@@ -1,19 +1,17 @@
 package referti;
 
 import java.util.Vector;
-
 import prog.utili.Data;
 import prog.utili.Sequenza;
 
 public class EsamiMultipliReferto extends Referto {
 	
-	private Coppia<String, Integer> coppia;
 	private Vector<Coppia<String, Integer>> sequenza = new Vector<>();
 	
 	
 	public EsamiMultipliReferto(Data data, Paziente paziente) {
 		super(data, paziente);
-		this.coppia = coppia;
+		
 	}
 	
 	public void aggiungiCoppia(String s, Integer i) {
@@ -31,6 +29,7 @@ public class EsamiMultipliReferto extends Referto {
 	public int criticity() {
 		int i = calcolaMediaValori();
 		int s = trovaValorePiùAlto();
+		return (s - i)*10;
 	}
 	
 	public int calcolaMediaValori() {
@@ -45,14 +44,31 @@ public class EsamiMultipliReferto extends Referto {
 	}
 	
 	public int trovaValorePiùAlto() {
-		Integer valore = new Integer(sequenza.size());
-		
+		Integer[] valori = new Integer[sequenza.size()];
+		boolean trovato;
+		do {
+			Integer temp;
+			trovato = false;
+			for(int i=1; i<valori.length; i++) {
+				if(valori[i]>valori[i-1]) {
+					trovato = true;
+					temp = valori[i];
+					valori[i] = valori[i-1];
+					valori[i-1] = temp;
+				}
+			}
+		}while(trovato);
+		return valori[0];
 	}
 
 	@Override
 	public boolean validity() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		int i = criticity();
+		Data oggi = new Data();
+		if((i/super.getData().quantoManca(oggi)) > 2) return true;
+		else return false;
+		
 	}
 	
 }
