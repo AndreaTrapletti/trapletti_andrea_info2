@@ -37,7 +37,7 @@ public abstract class Referto implements Comparable<Referto> {
 	}
 	public String toString() {
 		return "DATA REFERTO: "+this.data.toString()+" PAZIENTE "+this.paziente.getCognome()+" "+this.paziente.getNome()
-		            +this.paziente.getCodiceFiscale()+"  ID REFERTO:  "+this.ID;
+		            +" codice fiscale:  "+this.paziente.getCodiceFiscale()+"  ID REFERTO:  "+this.ID;
 	}
 	
 }

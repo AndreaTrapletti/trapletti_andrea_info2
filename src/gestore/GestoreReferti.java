@@ -28,7 +28,7 @@ public class GestoreReferti {
 		aggiungiPazienteAllaLista(paziente);
 	}
 	
-	public void aggiungiPazienteAllaLista(Paziente paziente) {
+	private void aggiungiPazienteAllaLista(Paziente paziente) {
 		boolean trovato = false;
 		for(int i =0; i< listaPazienti.size(); i++) {
 			if(listaPazienti.get(i).equals(paziente)) {
@@ -66,6 +66,7 @@ public class GestoreReferti {
 			file.close();
 		}else throw new FileNonPresenteException("il file non è stato trovato");
 	}
+	
 	private void generaeAggiungiRefertoConImmagine(String[] data){
 		Sesso sesso;
 		if (data[5].equals("M"))
@@ -111,8 +112,15 @@ public class GestoreReferti {
 		aggiungiPazienteAllaLista(paziente);
 	}
 	
-	public void cancellaRefertiDiUnPaziente(Paziente p) {
-		
+	public void cancellaRefertiDiUnPaziente(Paziente p) throws PazienteInesistenteException {
+		boolean trovato = false;
+		for (int i =0; i<referti.size(); i++) {
+			if(referti.get(i).getPaziente().equals(p)) {
+				referti.remove(i);
+				trovato = true;
+			}
+		}
+		if(trovato==false) throw new PazienteInesistenteException();
 	}
 	public void stampaInOrdineDiData() {
 		Referto[] r = new Referto[referti.size()];

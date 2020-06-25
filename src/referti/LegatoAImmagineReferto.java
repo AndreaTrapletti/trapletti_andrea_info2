@@ -44,7 +44,7 @@ public class LegatoAImmagineReferto extends Referto {
 	}
 	@Override
 	public String toString() {
-		return "LEGATO A IMMAGINE   " + super.toString()+ "HA FIRMATO IL DOTTOR: "+ this.dottoreCheHaFirmato.cognome
+		return "LEGATO A IMMAGINE   " + super.toString()+ "  HA FIRMATO IL DOTTOR: "+ this.dottoreCheHaFirmato.cognome
 				+"  "+this.dottoreCheHaFirmato.nome;
 	}
 	

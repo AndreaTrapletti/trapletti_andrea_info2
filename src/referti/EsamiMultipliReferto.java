@@ -27,23 +27,32 @@ public class EsamiMultipliReferto extends Referto {
 
 	@Override
 	public int criticity() {
-		int i = calcolaMediaValori();
-		int s = trovaValorePiùAlto();
+		int i = 0;
+		try {
+			i = calcolaMediaValori();
+		} catch (EsameMultiploException e) {
+			
+			e.printStackTrace();
+		}
+		int s; 
+		s = trovaValorePiùAlto();
 		return (s - i)*10;
 	}
 	
-	public int calcolaMediaValori() {
+	private int calcolaMediaValori() throws EsameMultiploException{
 		
 		int totale=0;
 		
-		for(int i = 0; i<this.sequenza.size(); i++) {
+		for(int j = 0; j<this.sequenza.size(); j++) {
 			
-			totale = totale + this.sequenza.get(i).getDx();
+			totale = totale + this.sequenza.get(j).getDx();
 		}
-		return totale/sequenza.size();
+		int r = sequenza.size();
+		if(totale == 0) throw new EsameMultiploException();
+		return totale/r;
 	}
 	
-	public int trovaValorePiùAlto() {
+	private int trovaValorePiùAlto() {
 		Integer[] valori = new Integer[sequenza.size()];
 		boolean trovato;
 		do {
@@ -64,9 +73,10 @@ public class EsamiMultipliReferto extends Referto {
 	@Override
 	public boolean validity() {
 		
-		int i = criticity();
+		int c;
+		c = criticity();
 		Data oggi = new Data();
-		if((i/super.getData().quantoManca(oggi)) > 2) return true;
+		if((c/super.getData().quantoManca(oggi)) > 2) return true;
 		else return false;
 		
 	}
