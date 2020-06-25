@@ -2,7 +2,7 @@ package referti;
 
 import prog.utili.Data;
 
-public abstract class Referto {
+public abstract class Referto implements Comparable<Referto> {
 	private Data data;
 	private Paziente paziente;
 	private int ID;
@@ -29,5 +29,15 @@ public abstract class Referto {
 	public abstract int criticity();
 	public abstract boolean validity();
 	
+	@Override
+	public int compareTo(Referto altro) {
+		int a = this.criticity();
+		int b = altro.criticity();
+		return a - b;
+	}
+	public String toString() {
+		return "DATA REFERTO: "+this.data.toString()+" PAZIENTE "+this.paziente.getCognome()+" "+this.paziente.getNome()
+		            +this.paziente.getCodiceFiscale()+"  ID REFERTO:  "+this.ID;
+	}
 	
 }

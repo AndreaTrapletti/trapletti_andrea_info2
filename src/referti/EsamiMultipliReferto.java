@@ -71,4 +71,9 @@ public class EsamiMultipliReferto extends Referto {
 		
 	}
 	
+	@Override
+	public String toString() {
+		return "ESAMI MULTIPLI   " + super.toString();
+	}
+	
 }

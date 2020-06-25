@@ -26,5 +26,8 @@ public class SingoloReferto extends Referto {
 		else return false;
 		
 	}
-	
+	@Override
+	public String toString() {
+		return "SINGOLO   " + super.toString()+ "Risultato " + this.risultato;
+	}
 }
