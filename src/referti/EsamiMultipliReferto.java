@@ -54,6 +54,9 @@ public class EsamiMultipliReferto extends Referto {
 	
 	private int trovaValorePiùAlto() {
 		Integer[] valori = new Integer[sequenza.size()];
+		for(int i=0; i<valori.length; i++) {
+			valori[i] = sequenza.get(i).getDx();
+		}
 		boolean trovato;
 		do {
 			Integer temp;

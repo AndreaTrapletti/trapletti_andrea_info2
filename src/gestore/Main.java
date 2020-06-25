@@ -60,6 +60,11 @@ public class Main {
         g.stampaPerPaziente();
 		System.out.println("------------------------------------------------------------------------------------------------------------------------------");
 		
+		try {
+			g.cancellaRefertiDiUnPaziente(paz1);
+		} catch (PazienteInesistenteException e) {
+			e.printStackTrace();
+		}
 	
 
 	}

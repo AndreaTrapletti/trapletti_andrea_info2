@@ -143,7 +143,7 @@ public class GestoreReferti {
 		}while(trovato);
 		
 		for(int i = 0; i < r.length; i++) {
-			if(r[i].validity())
+			if(r[i].validity() == true)
 				System.out.println(r[i].toString());
 		}
 	}
@@ -152,8 +152,8 @@ public class GestoreReferti {
 			System.out.println("ECCO LA LISTA DEI REFERTI DEL PAZIENTE: "+listaPazienti.get(i).getCognome()+"  "+listaPazienti.get(i).getNome());
 			for(int j =0; j<referti.size(); j++) {
 				
-				if(listaPazienti.get(i).equals(referti.get(j).getPaziente()))
-						System.out.println(listaPazienti.get(i).toString());
+				if(listaPazienti.get(i).getCodiceFiscale().equals(referti.get(j).getPaziente().getCodiceFiscale()))
+						System.out.println(referti.get(i).toString());
 					
 			}	
 		}
