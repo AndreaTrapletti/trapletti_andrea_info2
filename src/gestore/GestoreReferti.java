@@ -17,10 +17,27 @@ import referti.SingoloReferto;
 
 public class GestoreReferti {
 	public Vector<Referto> referti = new Vector<>();
+	
+	public Vector<Paziente> listaPazienti = new Vector<>();
+	
 	public GestoreReferti() {}
 	
 	public void inserisciReferto(Referto r) {
 		referti.add(r);
+		Paziente paziente = r.getPaziente();
+		aggiungiPazienteAllaLista(paziente);
+	}
+	
+	public void aggiungiPazienteAllaLista(Paziente paziente) {
+		boolean trovato = false;
+		for(int i =0; i< listaPazienti.size(); i++) {
+			if(listaPazienti.get(i).equals(paziente)) {
+				trovato = true;
+				break;
+			}
+		}
+		if (trovato == false) listaPazienti.add(paziente);
+		else System.out.println("Il paziente è già presente in lista...");
 	}
 	
 	public void inserisciRefertiDaFile(String nomeFile) {
@@ -58,7 +75,8 @@ public class GestoreReferti {
 		}
 		
 		referti.add(new LegatoAImmagineReferto(new Data(data[1]), new Paziente(data[2], data[3], new Data(data[4]), sesso), data[6], data[7], new Dottore(data[8], data[9])));
-		
+		Paziente paziente = new Paziente(data[2], data[3], new Data(data[4]), sesso);
+		aggiungiPazienteAllaLista(paziente);
 		
 	}
 	private void generaEAggiungiRefertoSingolo(String[] data) {
@@ -77,6 +95,8 @@ public class GestoreReferti {
 			risultato = RisultatoReferto.DUBBIO;
 		
 		referti.add(new SingoloReferto(new Data(data[1]), new Paziente(data[2], data[3], new Data(data[4]), sesso), risultato ));
+		Paziente paziente = new Paziente(data[2], data[3], new Data(data[4]), sesso);
+		aggiungiPazienteAllaLista(paziente);
 	}
 	
 	private void generaEAggiungiRefertoEsameMultiplo(String[] data) {
@@ -87,6 +107,8 @@ public class GestoreReferti {
 			sesso= Sesso.FEMMINA;
 		}
 		referti.add(new EsamiMultipliReferto(new Data(data[1]), new Paziente(data[2], data[3], new Data(data[4]), sesso)));
+		Paziente paziente = new Paziente(data[2], data[3], new Data(data[4]), sesso);
+		aggiungiPazienteAllaLista(paziente);
 	}
 	
 	public void cancellaRefertiDiUnPaziente(Paziente p) {
@@ -115,6 +137,17 @@ public class GestoreReferti {
 		for(int i = 0; i < r.length; i++) {
 			if(r[i].validity())
 				System.out.println(r[i].toString());
+		}
+	}
+	public void stampaPerPaziente() {
+		for(int i = 0; i<listaPazienti.size(); i++) {
+			System.out.println("ECCO LA LISTA DEI REFERTI DEL PAZIENTE: "+listaPazienti.get(i).getCognome()+"  "+listaPazienti.get(i).getNome());
+			for(int j =0; j<referti.size(); j++) {
+				
+				if(listaPazienti.get(i).equals(referti.get(j).getPaziente()))
+						System.out.println(listaPazienti.get(i).toString());
+					
+			}	
 		}
 	}
 	public void stampaPerCriticità() {
